@@ -13,8 +13,8 @@ export default ((opts?: Options) => {
     const links = opts?.links ?? []
     return (
       <footer class={`${displayClass ?? ""}`}>
-        <p>Nachhilfeseite für Einführung in die Informatik</p>
-        <a style="hover:pointer">Erstellt von AA</a>
+        <p>&copy; {new Date().getFullYear()} Nachhilfeseite für Abitur Q2</p>
+        <a style="hover:pointer">Eigentum und erstellt von von AA</a>
 
       </footer>
     )

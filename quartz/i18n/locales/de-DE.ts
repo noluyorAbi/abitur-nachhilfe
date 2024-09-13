@@ -47,14 +47,14 @@ export default {
       linkToOriginal: "Link zum Original",
     },
     search: {
-      title: "Suche",
+      title: "Suche (CTRL+K)",
       searchBarPlaceholder: "Suche nach etwas",
     },
     tableOfContents: {
       title: "Inhaltsverzeichnis",
     },
     contentMeta: {
-      readingTime: ({ minutes }) => `${minutes} min read`,
+      readingTime: ({ minutes }) => `${minutes} min Lesezeit`,
     },
   },
   pages: {

@@ -8,15 +8,26 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Nachhilfe Informatik",
+    pageTitle: "🎓 MyUniNotes - Nachhilfe",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
     locale: "de-DE",
-    baseUrl: "nachhilfe.informatik",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    baseUrl: "sahil.myuninotes.com",
+    ignorePatterns: [
+      "private",
+      "templates",
+      ".obsidian",
+      "**/JWT-Handbook/**",
+      "public/4.Semester/Informatik/SoftwareSecurity/JWT-Handbook/**",
+      "**/*ABGABE*",
+      "**/*TRANSKRIPT*",
+      "**/Statistik/BaySta/Kapitel**",
+      "**/Statistik/I2ML/**",
+      "**/SoftwareSecurity/**",
+    ],
     defaultDateType: "created",
     theme: {
       fontOrigin: "googleFonts",
@@ -33,10 +44,10 @@ const config: QuartzConfig = {
           gray: "#b8b8b8",
           darkgray: "#4e4e4e",
           dark: "#2b2b2b",
-          secondary: "#284b63",
+          secondary: "#00bee9",
           tertiary: "#84a59d",
           highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
+          textHighlight: ""
         },
         darkMode: {
           light: "#161618",
@@ -44,10 +55,10 @@ const config: QuartzConfig = {
           gray: "#646464",
           darkgray: "#d4d4d4",
           dark: "#ebebec",
-          secondary: "#7b97aa",
+          secondary: "#00BCE3",
           tertiary: "#84a59d",
           highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
+          textHighlight: ""
         },
       },
     },
@@ -56,12 +67,13 @@ const config: QuartzConfig = {
     transformers: [
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
-        priority: ["frontmatter", "filesystem"],
+        priority: ["frontmatter", "filesystem", "git"],
       }),
+      Plugin.Latex({ renderEngine: "katex" }),
       Plugin.SyntaxHighlighting({
         theme: {
           light: "github-light",
-          dark: "github-dark",
+          dark: "tokyo-night",
         },
         keepBackground: false,
       }),
@@ -70,7 +82,6 @@ const config: QuartzConfig = {
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
-      Plugin.Latex({ renderEngine: "katex" }),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
