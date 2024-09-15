@@ -1,7 +1,7 @@
 
 # 3. Gegeben ist der folgende binäre Baum:
 
-![[Pasted image 20240912145543.png]]
+
 ```mermaid
 graph TD;
     5 --> 3;
@@ -768,6 +768,64 @@ public void wasTueIch(BinaryTree<Integer> b) {
 >Analysieren Sie die Arbeitsweise der Methode wasTueich, indem Sie die Bele-
 gungen des Stapels sowie die Ausgabe auf dem Bildschirm für den abgebildeten
 Baum notieren. Erläutern Sie, was die Methode leistet.
+
+
+```java
+public void wasTueIch(BinaryTree<Integer> b) {
+    // Erstelle einen leeren Stapel zum Speichern der Knoten
+    Stack<BinaryTree<Integer>> stapel = new Stack<BinaryTree<Integer>>();
+
+    // Solange entweder der Stapel nicht leer ist oder der aktuelle Baum nicht leer ist
+    while (!stapel.isEmpty() || !b.isEmpty()) {
+        if (!b.isEmpty()) {
+            // Wenn der aktuelle Knoten existiert (nicht null ist)
+            // - Füge ihn dem Stapel hinzu für späteren Zugriff
+            stapel.push(b);
+            // - Bewege dich zum linken Kindknoten
+            b = b.getLeftTree();
+        } else {
+            // Wenn der aktuelle Knoten null ist (kein linker Kindknoten mehr)
+            // - Hole den obersten Knoten vom Stapel (zurück zum Elternknoten)
+            b = stapel.top();
+            stapel.pop();
+            // - Gib den Inhalt des Knotens aus (Verarbeitung des Knotens)
+            System.out.println(b.getContent());
+            // - Bewege dich zum rechten Kindknoten
+            b = b.getRightTree();
+        }
+    }
+}
+
+```
+
+Die Methode `wasTueIch` führt eine **in-order Traversierung** (symmetrischer Durchlauf) des binären Baums `b` durch und gibt die Inhalte der Knoten in dieser Reihenfolge auf dem Bildschirm aus.
+
+**Arbeitsweise der Methode:**
+
+1. **Initialisierung:**
+   - Ein leerer Stapel `stapel` wird erstellt.
+   - Die Methode beginnt mit dem übergebenen Baum `b`.
+
+2. **Schleife:**
+   - Die while-Schleife läuft, solange entweder der Stapel nicht leer ist oder der aktuelle Knoten `b` nicht leer ist.
+   - **Wenn `b` nicht leer ist:**
+     - Der aktuelle Knoten `b` wird auf den Stapel gelegt.
+     - `b` wird auf seinen linken Kindknoten gesetzt (`b = b.getLeftTree()`).
+     - Dies wiederholt sich, bis der linke äußerste Knoten erreicht ist.
+   - **Wenn `b` leer ist:**
+     - Der oberste Knoten wird vom Stapel genommen (`stapel.pop()`).
+     - Der Inhalt dieses Knotens wird ausgegeben (`System.out.println(b.getContent())`).
+     - `b` wird auf seinen rechten Kindknoten gesetzt (`b = b.getRightTree()`).
+
+**Erläuterung:**
+
+- Die Methode traversiert den Baum so weit wie möglich nach links und speichert dabei die Knoten auf dem Stapel.
+- Wenn kein linker Knoten mehr vorhanden ist, wird der letzte gespeicherte Knoten vom Stapel genommen, sein Wert ausgegeben, und die Traversierung setzt sich mit seinem rechten Teilbaum fort.
+- Dieses Vorgehen führt dazu, dass die Knoten in der Reihenfolge **"links - Wurzel - rechts"** besucht werden.
+
+**Fazit:**
+
+Die Methode `wasTueIch` realisiert eine **in-order Traversierung** des binären Baums und gibt dabei die Inhalte der Knoten in aufsteigender Reihenfolge aus (sofern der Baum sortiert ist). Diese Traversierungsmethode wird häufig verwendet, um die Elemente eines binären Suchbaums sortiert auszugeben.
 
 ## e) Entwickeln Sie eine Strategie für eine Methode, die die Anzahl aller Knoten eines binären Baums bestimmt, Implementieren Sie Ihre Methode.
 
